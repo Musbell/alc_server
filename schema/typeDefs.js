@@ -49,6 +49,7 @@ type Mutation {
   ): Student
   
    updateStudent(
+    id: ID!
     lastName: String
     firstName: String
     otherName: String
@@ -66,7 +67,7 @@ type Mutation {
     phone: String,
     newLastName: String
     newFirstName: String
-    newOtherNames: String
+    newOtherName: String
     newGender: String
     newDateOfBirth: String
     newNationality: String
