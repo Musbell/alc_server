@@ -1,36 +1,9 @@
 const pubsub = require('../pubsub');
 
 
-function buildFilters({ OR = [], firstNameContains, lastNameContains }) {
-  const filter = (firstNameContains || lastNameContains) ? {} : null;
-  if (firstNameContains) {
-    filter.firstName = { $regex: `.*${firstNameContains}.*` };
-  }
-  if (lastNameContains) {
-    filter.lastName = { $regex: `.*${lastNameContains}.*` };
-  }
-
-  let filters = filter ? [filter] : [];
-  for (let i = 0; i < OR.length; i++) {
-    filters = filters.concat(buildFilters(OR[i]));
-  }
-  return filters;
-}
-
-
 const resolvers = {
   Query: {
-    allStudents: async (root, { filter, first, skip }, { models }) => { // 1
-      const query = filter ? { $or: buildFilters(filter) } : {};
-      const cursor = models.Student.findAll(query);
-      if (first) {
-        cursor.limit(first);
-      }
-      if (skip) {
-        cursor.skip(skip);
-      }
-      return cursor;
-    },
+    allStudents: async (root, args, { models }) => await models.Student.findAll(),
     Student: async (root, { id }, { models }) => await models.Student.findOne({
       where: { id },
     }),

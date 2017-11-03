@@ -21,7 +21,7 @@ type Student {
   updatedAt: String!
 }
 type Query {
-  allStudents(filter: StudentFilter, skip: Int, first: Int): [Student!]!
+  allStudents: [Student!]!
   Student(id: ID!): Student
 }
 input StudentFilter {
