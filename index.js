@@ -11,7 +11,7 @@ import schema from './schema/index';
 import models from './models';
 
 const start = async () => {
-  const PORT = 1337;
+  // const PORT = 1337;
   const app = express();
 
   const buildOptions = async (req, res) => ({
@@ -23,11 +23,10 @@ const start = async () => {
   });
 
   app.use(cors());
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', (process.env.PORT || 3000));
   app.use(OpticsAgent.middleware());
   app.use('/graphiql', graphiqlExpress({
     endpointURL: '/graphql',
-    subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions`,
   }));
 
   app.use('/graphql', bodyParser.json(), graphqlExpress(buildOptions));
@@ -35,12 +34,12 @@ const start = async () => {
   const server = createServer(app);
 
   models.sequelize.sync().then(() => (
-    server.listen(PORT, () => {
+    server.listen(app.get('port'), () => {
       // SubscriptionServer.create(
       //   { execute, subscribe, schema },
       //   { server, path: '/subscriptions' },
       // );
-      console.log(`GraphQL server running on port ${PORT}.`);
+      console.log(`GraphQL server running on port`, app.get('port'));
     })
   ));
 };
