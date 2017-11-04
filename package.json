@@ -7,7 +7,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node index.js"
+    "start": "nodemon --exec babel-node index.js",
+    "optics": "OPTICS_API_KEY=service:Musbell-8222:fP5BAXuDSxrHsz2iI5_ykQ babel-node index.js"
   },
   "dependencies": {
     "apollo-server-express": "latest",
