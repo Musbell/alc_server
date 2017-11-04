@@ -1,1 +1,1 @@
-worker: OPTICS_API_KEY=service:Musbell-8222:fP5BAXuDSxrHsz2iI5_ykQ ./node_modules/.bin/babel-node index.js
+web: OPTICS_API_KEY=service:Musbell-8222:fP5BAXuDSxrHsz2iI5_ykQ ./node_modules/.bin/babel-node index.js
